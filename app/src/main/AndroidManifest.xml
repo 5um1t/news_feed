@@ -12,6 +12,9 @@
         android:theme="@style/Theme.NewsFeed"
         tools:targetApi="31">
         <activity
+            android:name=".News_page"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -20,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4118569678845627~7585943370"/>
     </application>
 
 </manifest>
