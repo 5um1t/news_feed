@@ -12,11 +12,21 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 public class News_page extends AppCompatActivity {
     private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_page);
 
+        String title,desc,content,imageUrl,url;
+
+        title=getIntent().getStringExtra("title");
+        desc=getIntent().getStringExtra("desc");
+        content=getIntent().getStringExtra("content");
+        imageUrl=getIntent().getStringExtra("image");
+        url=getIntent().getStringExtra("url");
+
+        //42:58 time GFG video
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
