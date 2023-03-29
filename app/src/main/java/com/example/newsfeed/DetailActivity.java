@@ -2,32 +2,84 @@ package com.example.newsfeed;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.squareup.picasso.Picasso;
+
+import java.net.URI;
 
 public class DetailActivity extends AppCompatActivity {
     private AdView mAdView;
+    String title,url,imageURL,content,desc,publishedAt;
+    private TextView titleTV,dateTV,contentTV,descTV;
+    private ImageView imageView;
+
+    private Button readNewsBTN;
+
+    private ImageButton shareBTN,backBTN;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_page);
 
-        String title,desc,content,imageUrl,url;
-
+        setContentView(R.layout.activity_detail);
+        //Getting data from Intent
         title=getIntent().getStringExtra("title");
-        desc=getIntent().getStringExtra("desc");
-        content=getIntent().getStringExtra("content");
-        imageUrl=getIntent().getStringExtra("image");
         url=getIntent().getStringExtra("url");
+        imageURL=getIntent().getStringExtra("imageURL");
+        content=getIntent().getStringExtra("content");
+        desc=getIntent().getStringExtra("desc");
+        publishedAt=getIntent().getStringExtra("publishedAt");
 
-        //42:58 time GFG video
+        //Init widgets
+        titleTV=findViewById(R.id.news_title);
+        descTV=findViewById(R.id.news_description);
+        dateTV=findViewById(R.id.news_date);
+        contentTV=findViewById(R.id.news_content);
+        imageView=findViewById(R.id.news_image);
+        readNewsBTN=findViewById(R.id.readNewsBTN);
+        shareBTN=findViewById(R.id.shareBTN);
+        backBTN=findViewById(R.id.backBTN);
 
+        //Setting date to the widgets
+        titleTV.setText(title);
+        descTV.setText(desc);
+        dateTV.setText(publishedAt);
+        contentTV.setText(content);
+        Picasso.get().load(imageURL).into(imageView);
+
+        //Reading full news
+        readNewsBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
+        //Sharing url using image button
+        shareBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareData(url);
+            }
+        });
+
+        //Implementing Google ads using admob
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -36,5 +88,12 @@ public class DetailActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+    }
+    public void shareData(String url){
+            Intent i=new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,url);
+            startActivity(Intent.createChooser(i,"Choose a Platform!"));
+
     }
 }

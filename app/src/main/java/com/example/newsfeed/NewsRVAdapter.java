@@ -1,2 +1,4 @@
-package com.example.newsfeed;public class NewsRVAdapter {
+package com.example.newsfeed;
+
+public class NewsRVAdapter{
 }

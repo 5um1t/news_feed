@@ -1,6 +1,6 @@
 package com.example.newsfeed;
 
-public class Articals {
+public class Articles {
 
     private String title;
     private String description;
@@ -10,7 +10,7 @@ public class Articals {
     private String publishedAt;
 
 
-    public Articals(String title, String description, String urlToImage, String url, String content, String publishedAt) {
+    public Articles(String title, String description, String urlToImage, String url, String content, String publishedAt) {
         this.title = title;
         this.description = description;
         this.urlToImage = urlToImage;
