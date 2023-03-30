@@ -25,15 +25,17 @@ public class DetailActivity extends AppCompatActivity {
     String title,url,imageURL,content,desc,publishedAt;
     private TextView titleTV,dateTV,contentTV,descTV;
     private ImageView imageView;
-
     private Button readNewsBTN;
-
     private ImageButton shareBTN,backBTN;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         setContentView(R.layout.activity_detail);
         //Getting data from Intent
@@ -60,6 +62,15 @@ public class DetailActivity extends AppCompatActivity {
         dateTV.setText(publishedAt);
         contentTV.setText(content);
         Picasso.get().load(imageURL).into(imageView);
+
+        //back to Home page
+        backBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(DetailActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         //Reading full news
         readNewsBTN.setOnClickListener(new View.OnClickListener() {
