@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //Init widgets
         titleTV=findViewById(R.id.news_title);
-        descTV=findViewById(R.id.news_description);
+        //descTV=findViewById(R.id.news_description);
         dateTV=findViewById(R.id.news_date);
         contentTV=findViewById(R.id.news_content);
         imageView=findViewById(R.id.news_image);
@@ -57,11 +57,11 @@ public class DetailActivity extends AppCompatActivity {
         backBTN=findViewById(R.id.backBTN);
 
         //Setting date to the widgets
-        titleTV.setText(title);
-        descTV.setText(desc);
-        dateTV.setText(publishedAt);
-        contentTV.setText(content);
-        Picasso.get().load(imageURL).into(imageView);
+       // titleTV.setText(title);
+        //descTV.setText(desc);
+        //dateTV.setText(publishedAt);
+        //contentTV.setText(content);
+        //Picasso.get().load(imageURL).into(imageView);
 
         //back to Home page
         backBTN.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +103,7 @@ public class DetailActivity extends AppCompatActivity {
     public void shareData(String url){
             Intent i=new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,"Link is :");
             i.putExtra(Intent.EXTRA_TEXT,url);
             startActivity(Intent.createChooser(i,"Choose a Platform!"));
 
