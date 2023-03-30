@@ -7,6 +7,46 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity">
+
+        <!--
+        slideranimation duration is to set duration for transition between two slides
+        sliderautocycledirection is to set animationbetween transition of your slides
+        sliderindicator enables is used to display the indicators for slider
+        slider indicator gravity is to set gravity for indicator gravity
+        slider indicator margin is to set margin for indicator
+        slider indicator orientation is used to add orientation for slider
+        slider indicator padding is use to add padding to indicator
+        slider indicator selected color is use to specify selected color
+        and slider indicator unselected color is use to specify the color when the slider is unselected
+        slider scroll time in sec is used to specify scrolling time in seconds
+        -->
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorEnabled="true"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="1" />
+
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idCourseRV"
         android:layout_width="match_parent"
@@ -19,7 +59,7 @@
         android:layout_below="@id/idCourseRV"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="-61dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:padding="4dp"
@@ -28,24 +68,4 @@
 </RelativeLayout>
 
 
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-<!--tools:context="com.lobothijau.carouselsederhana.MainActivity"-->
-<!--tools:showIn="@layout/activity_main">-->
 
-<!--<com.synnapps.carouselview.CarouselView-->
-<!--    android:id="@+id/carouselView"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="200dp"-->
-<!--    app:fillColor="#FFFFFFFF"-->
-<!--    app:pageColor="#00000000"-->
-<!--    app:radius="6dp"-->
-<!--    app:slideInterval="3000"-->
-<!--    app:strokeColor="#FF777777"-->
-<!--    app:strokeWidth="1dp"/>-->
-
-<!--</RelativeLayout>-->
