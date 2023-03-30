@@ -26,26 +26,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView=findViewById(R.id.idCourseRV);
+        recyclerView = findViewById(R.id.idCourseRV);
 
         // created new array list..
-        recyclerDataArrayList=new ArrayList<>();
+        recyclerDataArrayList = new ArrayList<>();
 
         // added data to array list
-        recyclerDataArrayList.add(new RecyclerData("Business",R.drawable.download));
-        recyclerDataArrayList.add(new RecyclerData("Entertainment",R.drawable.download));
-        recyclerDataArrayList.add(new RecyclerData("General",R.drawable.download));
-        recyclerDataArrayList.add(new RecyclerData("Health",R.drawable.download2));
-        recyclerDataArrayList.add(new RecyclerData("Science",R.drawable.download2));
-        recyclerDataArrayList.add(new RecyclerData("Sports",R.drawable.download2));
-        recyclerDataArrayList.add(new RecyclerData("Technology",R.drawable.download2));
+        recyclerDataArrayList.add(new RecyclerData("Business", R.drawable.download));
+        recyclerDataArrayList.add(new RecyclerData("Entertainment", R.drawable.download));
+        recyclerDataArrayList.add(new RecyclerData("General", R.drawable.download));
+        recyclerDataArrayList.add(new RecyclerData("Health", R.drawable.download2));
+        recyclerDataArrayList.add(new RecyclerData("Science", R.drawable.download2));
+        recyclerDataArrayList.add(new RecyclerData("Sports", R.drawable.download2));
+        recyclerDataArrayList.add(new RecyclerData("Technology", R.drawable.download2));
 
         // added data from arraylist to adapter class.
-        RecyclerViewAdapter adapter=new RecyclerViewAdapter(recyclerDataArrayList,this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(recyclerDataArrayList, this);
 
         // setting grid layout manager to implement grid view.
         // in this method '2' represents number of columns to be displayed in grid view.
-        GridLayoutManager layoutManager=new GridLayoutManager(this,3);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
 
         // at last set adapter to recycler view.
         recyclerView.setLayoutManager(layoutManager);
@@ -61,21 +61,14 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
 
 
-
-
-
-
-
-
         // carousel
 
-            // Urls of our images.
+        // Urls of our images.
         String url1 = "https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png";
         String url2 = "https://qphs.fs.quoracdn.net/main-qimg-8e203d34a6a56345f86f1a92570557ba.webp";
         String url3 = "https://bizzbucket.co/wp-content/uploads/2020/08/Life-in-The-Metro-Blog-Title-22.png";
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
+        @Override protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
@@ -114,16 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 //import android.os.Bundle;
