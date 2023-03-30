@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerDataArrayList.add(new RecyclerData("Sports",R.drawable.download2));
         recyclerDataArrayList.add(new RecyclerData("Technology",R.drawable.download2));
 
+        //toast
+
+
+
         // added data from arraylist to adapter class.
         RecyclerViewAdapter adapter=new RecyclerViewAdapter(recyclerDataArrayList,this);
 

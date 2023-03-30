@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
@@ -35,6 +38,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RecyclerData recyclerData = courseDataArrayList.get(position);
         holder.courseTV.setText(recyclerData.getTitle());
         holder.courseIV.setImageResource(recyclerData.getImgid());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), ""+recyclerData.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
