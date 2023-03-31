@@ -2,6 +2,7 @@ package com.example.newsfeed;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class RecyclerViewAdapter extends Adapter<RecyclerViewAdapter.RecyclerViewHolder>  {
 
     private ArrayList<RecyclerData> courseDataArrayList;
     private Context mcontext;
@@ -42,6 +45,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), ""+recyclerData.getTitle(),Toast.LENGTH_SHORT).show();
+                Intent i =new Intent (holder.itemView.getContext(), DetailActivity.class);
+                ContextCompat.startActivity(holder.itemView.getContext(),i,null);
             }
         });
     }

@@ -1,7 +1,5 @@
 package com.example.newsfeed;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,17 +9,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.squareup.picasso.Picasso;
-
-import java.net.URI;
 
 public class DetailActivity extends AppCompatActivity {
-    private AdView mAdView;
+    protected AdView mAdView;
     String title,url,imageURL,content,desc,publishedAt;
     private TextView titleTV,dateTV,contentTV,descTV;
     private ImageView imageView;
