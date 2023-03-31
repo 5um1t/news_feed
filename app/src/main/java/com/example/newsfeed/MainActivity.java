@@ -18,6 +18,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    //refactor
 
     private Button homeBTN;
     private RecyclerView recyclerView;
