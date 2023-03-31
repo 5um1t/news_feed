@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="130dp"
     android:layout_height="70dp"
-    android:layout_margin="5dp"
     android:layout_gravity="center"
+    android:layout_margin="5dp"
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
@@ -12,23 +12,23 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/cIVCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/cIVCategory"
-            android:src="@color/yellow"
-            android:scaleType="centerCrop"/>
+            android:background="@drawable/images"
+            android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/cTVCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cTVCategory"
-            android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="Category"
-            android:textColor="@color/white"
-            android:textAlignment="center"
+            android:gravity="center"
             android:padding="3dp"
-            android:textStyle="bold"/>
+            android:text="Category"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>

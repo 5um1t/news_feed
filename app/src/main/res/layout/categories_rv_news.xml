@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
-    app:cardBackgroundColor="@color/grey">
+    app:cardBackgroundColor="@color/grey"
+    app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/cIVnews"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/cIVnews"
-            android:scaleType="centerCrop"/>
+            android:background="@drawable/download"
+            android:scaleType="centerCrop" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/cHeadingNews"
-            android:layout_below="@+id/cIVnews"
-            android:textColor="@color/yellow"
-            android:text="News Heading"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:padding="3dp"
-            android:maxLines="2"
-            android:layout_margin="3dp"/>
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cSubheadingNews"
-            android:layout_below="@+id/cHeadingNews"
-            android:text="Subheadings"
-            android:textColor="@color/white"
-            android:maxLines="3"
+            android:layout_below="@+id/cIVnews"
             android:layout_margin="3dp"
-            android:padding="3dp"/>
+            android:maxLines="2"
+            android:padding="3dp"
+            android:text="News Heading"
+            android:textColor="@color/yellow"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cSubheadingNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cHeadingNews"
+            android:layout_margin="3dp"
+            android:maxLines="3"
+            android:padding="3dp"
+            android:text="Subheadings Subheadings Subheadings Subheadings
+                          Subheadings Subheadings Subheadings Subheadings"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
