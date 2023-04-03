@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAdapter.ViewHolder> {
 
-    private ArrayList<Articles> articlesArrayList;
+    private ArrayList<ArticleModel> articlesArrayList;
     private Context context;
 
-    public CategoryNewsRVAdapter(ArrayList<Articles> articlesArrayList, Context context) {
+    public CategoryNewsRVAdapter(ArrayList<ArticleModel> articlesArrayList, Context context) {
         this.articlesArrayList = articlesArrayList;
         this.context = context;
     }
@@ -32,7 +32,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Articles articles = articlesArrayList.get(position);
+        ArticleModel articles = articlesArrayList.get(position);
         holder.subHeadingTV.setText(articles.getDescription());
         holder.headingTV.setText(articles.getTitle());
 //        Picasso.get().load(articles.getUrlToImage()).into(holder.newsIV);

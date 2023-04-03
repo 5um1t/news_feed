@@ -26,7 +26,7 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     private ImageView categoryIV;
     private RecyclerView newsRV, categoryRV;
     private ProgressBar loadingPB;
-    private ArrayList<Articles> articlesArrayList;
+    private ArrayList<ArticleModel> articlesArrayList;
     private ArrayList<CategoryRVModel> categoryRVModels;
     private CategoryRVAdapter categoryRVAdapter;
     private CategoryNewsRVAdapter categoryNewsRVAdapter;
@@ -75,10 +75,10 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     }
 
     private void getNews() {
-        Articles a1 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        Articles a2 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        Articles a3 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        Articles a4 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        ArticleModel a1 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        ArticleModel a2 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        ArticleModel a3 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        ArticleModel a4 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
         articlesArrayList.add(a1);
         articlesArrayList.add(a2);
         articlesArrayList.add(a3);
