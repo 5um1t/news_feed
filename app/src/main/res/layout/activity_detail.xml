@@ -73,7 +73,6 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
                 android:padding="4dp"
-                android:text="Mexico migrants: Deadly fire at Juárez migrant centre kills at least 38"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
@@ -85,7 +84,6 @@
                 android:layout_below="@id/news_title"
                 android:layout_margin="4dp"
                 android:padding="4dp"
-                android:text="Wednesday, 29 March 2023"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/darker_gray" />
 
@@ -108,7 +106,6 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
                 android:padding="4dp"
-                android:text="Many of the victims had travelled from Central and South America trying to get to the US.The blaze at the facility in Ciudad Juárez broke out shortly before 22:00 local time (04:00 GMT) on Monday.The city, located across the Rio Grande river from El Paso, Texas, has seen an influx of people in recent weeks.Many have been heading to the US border in expectation of an end to Title 42, a pandemic-era policy which gives the US government the power to quickly expel migrants trying to cross its border.Mexican President Andrés Manuel López Obrador said migrants had set mattresses ablaze.It was related to a protest they started, we think, when they learned that they'd be deported, the president said.They didn't think that would cause this terrible tragedy, he added.Photos from the scene show body bags lined up on the pavement outside.This is what El Paso looks like amid border crisisMexico's National Migration Institute (INM) lowered the death toll to 38 from 40, saying a visit to hospitals where victims were being treated had confirmed the lower number.Local media say the migrants inside the building where the blaze happened had been picked up by the authorities on Monday and taken to the centre. The facility is located near the Stanton-Lerdo Bridge, which links Mexico and the US.Twenty-nine people were also injured in the blaze. Some 68 men from Central and South America were inside the centre - which is run by the INM - when the fire happened.A statement from US Customs and Border Protection said they were prepared to receive and process those who were injured in the fire and are being transported via ambulance from Mexican to US medical facilities for treatment.Mexican authorities said the dead and injured included people from Guatemala, Honduras, Venezuela, El Salvador, Colombia and Ecuador.Twenty-eight Guatemalan citizens were killed in the fire, the country's foreign minister Mario Bucaro told reporters.UN Secretary General Antonio Guterres called for a thorough investigation.A spokesman said Mr Guterres would continue working with the authorities of countries where mixed movements of people occur to establish safer, more regulated, and organised migration pathways.The US ambassador to Mexico, Ken Salazar, said the tragedy was a reminder to the governments of the region of the importance of fixing a broken migration system and the risks of irregular migration.Title 42, which allows US border officials to deny individuals entry to the US to prevent the spread of communicable disease, was first implemented at the start of the Covid pandemic.The Biden administration has announced its intention to end the use of the Trump-era policy, but for now it remains in place.Since the announcement, the number of migrants in Ciudad Juárez awaiting the possible lifting of the restrictions has swelled.Recently hundreds of frustrated migrants, mostly Venezuelan, tried to force their way over an international bridge into El Paso from the Mexican city.US officials imposed physical barricades saying the group had posed a potential threat to make a mass entry."
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/darker_gray" />
 

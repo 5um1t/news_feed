@@ -1,10 +1,6 @@
 package com.example.newsfeed;
 
-<<<<<<< HEAD:app/src/main/java/com/example/newsfeed/ArticleModel.java
 public class ArticleModel {
-
-=======
-public class Articles {
     private String title;
     private String description;
     private String urlToImage;
@@ -12,7 +8,8 @@ public class Articles {
     private String content;
     private String publishedAt;
     private String author;
-    public void ArticleModel(String title, String description, String urlToImage, String url, String content, String publishedAt, String author) {
+
+    public ArticleModel(String title, String description, String urlToImage, String url, String content, String publishedAt, String author) {
         this.title = title;
         this.description = description;
         this.urlToImage = urlToImage;
@@ -20,6 +17,10 @@ public class Articles {
         this.content = content;
         this.publishedAt = publishedAt;
         this.author = author;
+    }
+
+    public ArticleModel() {
+
     }
 
     public String getTitle() {
@@ -77,5 +78,4 @@ public class Articles {
     public void setAuthor(String author) {
         this.author = author;
     }
-}
 }

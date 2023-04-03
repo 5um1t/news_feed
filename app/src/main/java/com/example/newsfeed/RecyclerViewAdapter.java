@@ -2,6 +2,7 @@ package com.example.newsfeed;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), ""+recyclerData.getTitle(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), CategoriesPageActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }

@@ -16,14 +16,11 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-    private AdView mAdView;
-    String title, url, imageURL, content, desc, publishedAt;
-    private TextView titleTV, dateTV, contentTV, descTV;
-    private ImageView imageView;
-    private Button readNewsBTN;
-    private ImageButton shareBTN, backBTN;
+    String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,37 +30,28 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_detail);
-        //Getting data from Intent
-        title = getIntent().getStringExtra("title");
-        url = getIntent().getStringExtra("url");
-        imageURL = getIntent().getStringExtra("imageURL");
-        content = getIntent().getStringExtra("content");
-        desc = getIntent().getStringExtra("desc");
-        publishedAt = getIntent().getStringExtra("publishedAt");
 
         //Init widgets
-        titleTV = findViewById(R.id.news_title);
-        //descTV=findViewById(R.id.news_description);
-        dateTV = findViewById(R.id.news_date);
-        contentTV = findViewById(R.id.news_content);
-        imageView = findViewById(R.id.news_image);
-        readNewsBTN = findViewById(R.id.readNewsBTN);
-        shareBTN = findViewById(R.id.shareBTN);
-        backBTN = findViewById(R.id.backBTN);
+        Button readNewsBTN = findViewById(R.id.readNewsBTN);
+        ImageButton shareBTN = findViewById(R.id.shareBTN);
+        ImageButton backBTN = findViewById(R.id.backBTN);
+        TextView titleTV = findViewById(R.id.news_title);
+        TextView dateTV = findViewById(R.id.news_date);
+        ImageView imageView = findViewById(R.id.news_image);
+        TextView contentTV = findViewById(R.id.news_content);
+        //setting data using DbHelper
+        DbHelper dbHelper = new DbHelper();
+        dbHelper.helper();
+        titleTV.setText(dbHelper.articleModel.getTitle());
+        dateTV.setText(dbHelper.articleModel.getPublishedAt());
+        contentTV.setText(dbHelper.articleModel.getContent());
+        Picasso.get().load(dbHelper.articleModel.getUrlToImage()).into(imageView);
 
-        //Setting date to the widgets
-        // titleTV.setText(title);
-        //descTV.setText(desc);
-        //dateTV.setText(publishedAt);
-        //contentTV.setText(content);
-        //Picasso.get().load(imageURL).into(imageView);
-
-        //back to Home page
+        //back to previous page
         backBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DetailActivity.this, MainActivity.class);
-                startActivity(i);
+                onBackPressed();
             }
         });
 
@@ -91,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
