@@ -19,6 +19,10 @@ public class ArticleModel {
         this.author = author;
     }
 
+    public ArticleModel() {
+
+    }
+
     //    public void ArticleModel(String title, String description, String urlToImage, String url, String content, String publishedAt, String author) {
 //        this.title = title;
 //        this.description = description;

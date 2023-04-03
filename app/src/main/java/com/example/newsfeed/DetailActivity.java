@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
     private AdView mAdView;
@@ -36,14 +37,13 @@ public class DetailActivity extends AppCompatActivity {
         //Getting data from Intent
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
-        imageURL = getIntent().getStringExtra("imageURL");
+        imageURL = getIntent().getStringExtra("imageurl");
         content = getIntent().getStringExtra("content");
         desc = getIntent().getStringExtra("desc");
         publishedAt = getIntent().getStringExtra("publishedAt");
 
         //Init widgets
         titleTV = findViewById(R.id.news_title);
-        //descTV=findViewById(R.id.news_description);
         dateTV = findViewById(R.id.news_date);
         contentTV = findViewById(R.id.news_content);
         imageView = findViewById(R.id.news_image);
@@ -52,11 +52,10 @@ public class DetailActivity extends AppCompatActivity {
         backBTN = findViewById(R.id.backBTN);
 
         //Setting date to the widgets
-        // titleTV.setText(title);
-        //descTV.setText(desc);
-        //dateTV.setText(publishedAt);
-        //contentTV.setText(content);
-        //Picasso.get().load(imageURL).into(imageView);
+        titleTV.setText(title);
+        dateTV.setText(publishedAt);
+        contentTV.setText(content);
+        Picasso.get().load(imageURL).into(imageView);
 
         //back to Home page
         backBTN.setOnClickListener(new View.OnClickListener() {

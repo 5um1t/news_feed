@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.ViewHolder> {
@@ -35,7 +37,7 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryRVModel categoryRVModel = categoryRVModels.get(position);
         holder.categoryTV.setText(categoryRVModel.getCategory());
-//        Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.categoryIV);
+        Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.categoryIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

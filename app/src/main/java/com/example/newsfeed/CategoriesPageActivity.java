@@ -1,10 +1,11 @@
 package com.example.newsfeed;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,19 +18,26 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CategoriesPageActivity extends AppCompatActivity implements CategoryRVAdapter.CategoryClickInterface {
     private Toolbar tb;
     private TextView tbText;
     private ImageView categoryIV;
     private RecyclerView newsRV, categoryRV;
-    private ProgressBar loadingPB;
-    private ArrayList<ArticleModel> articlesArrayList;
+    protected ProgressBar loadingPB;
+    protected ArrayList<ArticleModel> articlesArrayList;
     private ArrayList<CategoryRVModel> categoryRVModels;
     private CategoryRVAdapter categoryRVAdapter;
-    private CategoryNewsRVAdapter categoryNewsRVAdapter;
+    protected CategoryNewsRVAdapter categoryNewsRVAdapter;
     private AdView adv;
 
 
@@ -48,49 +56,82 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         newsRV.setAdapter(categoryNewsRVAdapter);
         categoryRV.setAdapter(categoryRVAdapter);
         getCategories();
-        getNews();
+        getNews("General");
+        categoryNewsRVAdapter.notifyDataSetChanged();
         tb = findViewById(R.id.cToolbar);
         tbText = findViewById(R.id.toolbarText);
         adv = findViewById(R.id.adView);
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        adv= findViewById(R.id.adView);
+        adv = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adv.loadAd(adRequest);
     }
 
 
     private void getCategories() {
-        categoryRVModels.add(new CategoryRVModel("General", ""));
-        categoryRVModels.add(new CategoryRVModel("Business", ""));
-        categoryRVModels.add(new CategoryRVModel("Entertainment", ""));
-        categoryRVModels.add(new CategoryRVModel("Health", ""));
-        categoryRVModels.add(new CategoryRVModel("Science", ""));
-        categoryRVModels.add(new CategoryRVModel("Sports", ""));
-        categoryRVModels.add(new CategoryRVModel("Technology", ""));
-    }
-
-    private void getNews() {
-        ArticleModel a1 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        ArticleModel a2 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        ArticleModel a3 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        ArticleModel a4 = new ArticleModel("Test", "Test", "test.com", "test.com", "test test test","testPublished");
-        articlesArrayList.add(a1);
-        articlesArrayList.add(a2);
-        articlesArrayList.add(a3);
-        articlesArrayList.add(a4);
+        categoryRVModels.add(new CategoryRVModel("General", "https://img.freepik.com/free-vector/global-technology-earth-news-bulletin-background_1017-33687.jpg"));
+        categoryRVModels.add(new CategoryRVModel("Business", "https://www.snowsoftware.com/wp-content/uploads/2022/02/Home_Pillar_Tile_2b.jpg"));
+        categoryRVModels.add(new CategoryRVModel("Entertainment", "https://blog.ipleaders.in/wp-content/uploads/2020/06/netflix-amazon-india-streaming_1547808042873.jpg"));
+        categoryRVModels.add(new CategoryRVModel("Health", "https://www.shutterstock.com/image-photo/hand-arranging-wood-block-healthcare-260nw-1561815367.jpg"));
+        categoryRVModels.add(new CategoryRVModel("Science", "https://media.istockphoto.com/id/1150397417/photo/abstract-luminous-dna-molecule-doctor-using-tablet-and-check-with-analysis-chromosome-dna.jpg?s=612x612&w=0&k=20&c=WKApDIgCaSrcQ_pGOkDoKZLt6hUvx7coT3hMsV5aF9E="));
+        categoryRVModels.add(new CategoryRVModel("Sports", "https://thumbs.dreamstime.com/b/sports-tools-balls-shoes-ground-108686133.jpg"));
+        categoryRVModels.add(new CategoryRVModel("Technology", "https://thumbs.dreamstime.com/b/internet-information-technology-concept-laptop-computer-showing-data-processing-screen-122397310.jpg"));
+        categoryRVAdapter.notifyDataSetChanged();
     }
 
 
 
-    //
-//
+    private void getNews(String category) {
+        loadingPB.setVisibility(View.VISIBLE);
+        articlesArrayList.clear();
+        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
+        String base_url = "https://newsapi.org/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(base_url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<NewsModel> call;
+        if (category.equals("General")) {
+            call = retrofitAPI.getAllNews(url);
+        } else {
+            call = retrofitAPI.getNewsByCategory(categoryURL);
+        }
+
+        call.enqueue(new Callback<NewsModel>() {
+            @Override
+            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                NewsModel newsModel = response.body();
+                loadingPB.setVisibility(View.GONE);
+                ArrayList<ArticleModel> articles = newsModel.getArticles();
+                for (int i = 0; i < articles.size(); i++) {
+                    articlesArrayList.add(new ArticleModel(articles.get(i).getTitle(), articles.get(i).getDescription(),
+                            articles.get(i).getUrlToImage(), articles.get(i).getUrl(), articles.get(i).getContent(),
+                            articles.get(i).getPublishedAt(), articles.get(i).getAuthor()));
+                }
+                categoryNewsRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<NewsModel> call, Throwable t) {
+                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+
     @Override
     public void onCategoryClick(int position) {
-
+        String category = categoryRVModels.get(position).getCategory();
+        getNews(category);
     }
 }
