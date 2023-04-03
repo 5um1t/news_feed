@@ -24,8 +24,6 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button readNewsBTN;
     private ImageButton shareBTN, backBTN;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

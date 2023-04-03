@@ -4,14 +4,8 @@ import java.util.ArrayList;
 
 public class NewsModel {
     private String status;
+    private ArrayList<ArticleModel> articles;
     private int totalResults;
-    private ArrayList<Articles> articles;
-
-    public NewsModel(String status, int totalResults, ArrayList<Articles> articles) {
-        this.status = status;
-        this.totalResults = totalResults;
-        this.articles = articles;
-    }
 
     public int getTotalResults() {
         return totalResults;
@@ -29,11 +23,17 @@ public class NewsModel {
         this.status = status;
     }
 
-    public ArrayList<Articles> getArticles() {
+    public ArrayList<ArticleModel> getArticles() {
         return articles;
     }
 
-    public void setArticles(ArrayList<Articles> articles) {
+    public void setArticles(ArrayList<ArticleModel> articles) {
+        this.articles = articles;
+    }
+
+    public NewsModel(int totalResults, String status, ArrayList<ArticleModel> articles) {
+        this.totalResults = totalResults;
+        this.status = status;
         this.articles = articles;
     }
 }
