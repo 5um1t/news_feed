@@ -3,10 +3,9 @@ package com.example.newsfeed;
 import java.util.ArrayList;
 
 public class NewsModel {
-
-    private int totalResults;
     private String status;
-    private ArrayList<ArticleModel>articles;
+    private ArrayList<ArticleModel> articles;
+    private int totalResults;
 
     public int getTotalResults() {
         return totalResults;

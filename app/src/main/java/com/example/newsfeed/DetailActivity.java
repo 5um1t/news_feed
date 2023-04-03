@@ -24,8 +24,6 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button readNewsBTN;
     private ImageButton shareBTN, backBTN;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +102,5 @@ public class DetailActivity extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_TEXT, "Link is :");
         i.putExtra(Intent.EXTRA_TEXT, url);
         startActivity(Intent.createChooser(i, "Choose a Platform!"));
-
     }
 }
