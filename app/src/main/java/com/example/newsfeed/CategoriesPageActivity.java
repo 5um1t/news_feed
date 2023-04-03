@@ -75,10 +75,10 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     }
 
     private void getNews() {
-        Articles a1 = new Articles("Test", "Test", "test.com", "test.com", "test test test");
-        Articles a2 = new Articles("Test", "Test", "test.com", "test.com", "test test test");
-        Articles a3 = new Articles("Test", "Test", "test.com", "test.com", "test test test");
-        Articles a4 = new Articles("Test", "Test", "test.com", "test.com", "test test test");
+        Articles a1 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        Articles a2 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        Articles a3 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
+        Articles a4 = new Articles("Test", "Test", "test.com", "test.com", "test test test","testPublished");
         articlesArrayList.add(a1);
         articlesArrayList.add(a2);
         articlesArrayList.add(a3);
