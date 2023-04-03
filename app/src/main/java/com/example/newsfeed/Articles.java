@@ -1,14 +1,12 @@
 package com.example.newsfeed;
 
 public class Articles {
-
     private String title;
     private String description;
     private String urlToImage;
     private String url;
     private String content;
     private String publishedAt;
-
 
     public Articles(String title, String description, String urlToImage, String url, String content, String publishedAt) {
         this.title = title;
