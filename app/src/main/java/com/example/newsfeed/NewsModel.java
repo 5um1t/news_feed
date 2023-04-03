@@ -6,7 +6,7 @@ public class NewsModel {
 
     private int totalResults;
     private String status;
-    private ArrayList<Articles>articles;
+    private ArrayList<ArticleModel>articles;
 
     public int getTotalResults() {
         return totalResults;
@@ -24,15 +24,15 @@ public class NewsModel {
         this.status = status;
     }
 
-    public ArrayList<Articles> getArticles() {
+    public ArrayList<ArticleModel> getArticles() {
         return articles;
     }
 
-    public void setArticles(ArrayList<Articles> articles) {
+    public void setArticles(ArrayList<ArticleModel> articles) {
         this.articles = articles;
     }
 
-    public NewsModel(int totalResults, String status, ArrayList<Articles> articles) {
+    public NewsModel(int totalResults, String status, ArrayList<ArticleModel> articles) {
         this.totalResults = totalResults;
         this.status = status;
         this.articles = articles;

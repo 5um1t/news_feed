@@ -1,6 +1,6 @@
 package com.example.newsfeed;
 
-public class Articles {
+public class ArticleModel {
 
     private String title;
     private String description;
@@ -8,15 +8,16 @@ public class Articles {
     private String url;
     private String content;
     private String publishedAt;
+    private String author;
 
-
-    public Articles(String title, String description, String urlToImage, String url, String content, String publishedAt) {
+    public ArticleModel(String title, String description, String urlToImage, String url, String content, String publishedAt, String author) {
         this.title = title;
         this.description = description;
         this.urlToImage = urlToImage;
         this.url = url;
         this.content = content;
         this.publishedAt = publishedAt;
+        this.author = author;
     }
 
     public String getTitle() {
@@ -65,5 +66,13 @@ public class Articles {
 
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
