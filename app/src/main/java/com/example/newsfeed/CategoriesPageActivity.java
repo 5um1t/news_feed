@@ -26,39 +26,32 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     private Toolbar tb;
     private TextView tbText;
     private ImageView categoryIV;
-    private ImageButton backBTN;
-    private RecyclerView newsRV, categoryRV;
-    private ProgressBar loadingPB;
     private ArrayList<ArticleModel> articlesArrayList;
     private ArrayList<CategoryRVModel> categoryRVModels;
-    private CategoryRVAdapter categoryRVAdapter;
-    private CategoryNewsRVAdapter categoryNewsRVAdapter;
-    private AdView adv;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
-        newsRV = findViewById(R.id.cNews);
-        categoryRV = findViewById(R.id.categories);
-        loadingPB = findViewById(R.id.cLoading);
+        RecyclerView newsRV = findViewById(R.id.cNews);
+        RecyclerView categoryRV = findViewById(R.id.categories);
+        ProgressBar loadingPB = findViewById(R.id.cLoading);
         articlesArrayList = new ArrayList<>();
         categoryRVModels = new ArrayList<>();
-        categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
-        categoryRVAdapter = new CategoryRVAdapter(categoryRVModels, this, this::onCategoryClick);
+        CategoryNewsRVAdapter categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
+        CategoryRVAdapter categoryRVAdapter = new CategoryRVAdapter(categoryRVModels, this, this::onCategoryClick);
         newsRV.setLayoutManager(new LinearLayoutManager(this));
         newsRV.setAdapter(categoryNewsRVAdapter);
         categoryRV.setAdapter(categoryRVAdapter);
         getCategories();
         getNews();
-        backBTN=findViewById(R.id.backBTN);
-        adv = findViewById(R.id.adView);
+        ImageButton backBTN = findViewById(R.id.backBTN);
+        AdView adv = findViewById(R.id.adView);
 
         backBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-finish();
+                finish();
             }
         });
         MobileAds.initialize(this, new OnInitializationCompleteListener() {

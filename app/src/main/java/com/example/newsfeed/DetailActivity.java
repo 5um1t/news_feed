@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView dateTV = findViewById(R.id.news_date);
         ImageView imageView = findViewById(R.id.news_image);
         TextView contentTV = findViewById(R.id.news_content);
+
         //setting data using DbHelper
         DbHelper dbHelper = new DbHelper();
         dbHelper.helper();

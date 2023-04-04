@@ -1,6 +1,5 @@
 package com.example.newsfeed;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,21 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
 
-    private ArrayList<RecyclerData> courseDataArrayList;
-    private Context mcontext;
+    private final ArrayList<CategoryRVModel> courseDataArrayList;
 
-    public RecyclerViewAdapter(ArrayList<RecyclerData> recyclerDataArrayList, Context mcontext) {
+    public RecyclerViewAdapter(ArrayList<CategoryRVModel> recyclerDataArrayList, Context mcontext) {
         this.courseDataArrayList = recyclerDataArrayList;
-        this.mcontext = mcontext;
     }
 
     @NonNull
@@ -36,9 +34,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
-        RecyclerData recyclerData = courseDataArrayList.get(position);
-        holder.courseTV.setText(recyclerData.getTitle());
-        holder.courseIV.setImageResource(recyclerData.getImgid());
+        CategoryRVModel categoryRVModel = courseDataArrayList.get(position);
+        holder.courseTV.setText(categoryRVModel.getCategory());
+        Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.courseIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,10 +53,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // View Holder Class to handle Recycler View.
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView courseTV;
-        private ImageView courseIV;
+        private final TextView courseTV;
+        private final ImageView courseIV;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);

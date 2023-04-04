@@ -3,7 +3,7 @@ package com.example.newsfeed;
 public class RecyclerData {
 
     private String title;
-    private int imgid;
+    private int imgId;
 
     public String getTitle() {
         return title;
@@ -13,16 +13,16 @@ public class RecyclerData {
         this.title = title;
     }
 
-    public int getImgid() {
-        return imgid;
+    public int getImgId() {
+        return imgId;
     }
 
-    public void setImgid(int imgid) {
-        this.imgid = imgid;
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
     }
 
-    public RecyclerData(String title, int imgid) {
+    public RecyclerData(String title, int imgId) {
         this.title = title;
-        this.imgid = imgid;
+        this.imgId = imgId;
     }
 }
