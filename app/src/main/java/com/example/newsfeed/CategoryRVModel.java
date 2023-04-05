@@ -4,6 +4,10 @@ public class CategoryRVModel {
     private String category;
     private String categoryImageUrl;
 
+    public CategoryRVModel() {
+
+    }
+
     public String getCategory() {
         return category;
     }

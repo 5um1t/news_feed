@@ -16,14 +16,18 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-    private AdView mAdView;
-    String title, url, imageURL, content, desc, publishedAt;
-    private TextView titleTV, dateTV, contentTV, descTV;
-    private ImageView imageView;
-    private Button readNewsBTN;
-    private ImageButton shareBTN, backBTN;
+
+    ImageButton backBTN, shareBTN;
+    ImageView imageView;
+    TextView titleTV, contentTV, dateTV;
+    Button readNewsBTN;
+
+    String url;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,42 +35,29 @@ public class DetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
         setContentView(R.layout.activity_detail);
-        //Getting data from Intent
-        title = getIntent().getStringExtra("title");
-        url = getIntent().getStringExtra("url");
-        imageURL = getIntent().getStringExtra("imageURL");
-        content = getIntent().getStringExtra("content");
-        desc = getIntent().getStringExtra("desc");
-        publishedAt = getIntent().getStringExtra("publishedAt");
 
-        //Init widgets
-        titleTV = findViewById(R.id.news_title);
-        //descTV=findViewById(R.id.news_description);
-        dateTV = findViewById(R.id.news_date);
-        contentTV = findViewById(R.id.news_content);
-        imageView = findViewById(R.id.news_image);
-        readNewsBTN = findViewById(R.id.readNewsBTN);
-        shareBTN = findViewById(R.id.shareBTN);
-        backBTN = findViewById(R.id.backBTN);
+        initViews();
+        initializeShareBtn();
+        setDataToActivity();
+        initializeBackBtn();
+        initializeReadNewsBtn();
+        initAds();
+    }
 
-        //Setting date to the widgets
-        // titleTV.setText(title);
-        //descTV.setText(desc);
-        //dateTV.setText(publishedAt);
-        //contentTV.setText(content);
-        //Picasso.get().load(imageURL).into(imageView);
-
-        //back to Home page
-        backBTN.setOnClickListener(new View.OnClickListener() {
+    private void initAds() {
+        //Implementing Google ads using admob
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DetailActivity.this, MainActivity.class);
-                startActivity(i);
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 
+    private void initializeReadNewsBtn() {
         //Reading full news
         readNewsBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +67,49 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void initializeBackBtn() {
+        //back to previous page
+        backBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void initViews() {
+        //Init widgets
+        readNewsBTN = findViewById(R.id.readNewsBTN);
+        shareBTN = findViewById(R.id.shareBTN);
+        backBTN = findViewById(R.id.backBTN);
+        titleTV = findViewById(R.id.news_title);
+        dateTV = findViewById(R.id.news_date);
+        imageView = findViewById(R.id.news_image);
+        contentTV = findViewById(R.id.news_content);
+    }
+
+    public void setDataToActivity() {
+        //setting data using DbHelper
+        DbHelper dbHelper = new DbHelper();
+        dbHelper.helper();
+        titleTV.setText(dbHelper.articleModel.getTitle());
+        dateTV.setText(dbHelper.articleModel.getPublishedAt());
+        contentTV.setText(dbHelper.articleModel.getContent());
+        Picasso.get().load(dbHelper.articleModel.getUrlToImage()).into(imageView);
+    }
+
+
+    public void shareData(String url) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, "Link is :");
+        i.putExtra(Intent.EXTRA_TEXT, url);
+        startActivity(Intent.createChooser(i, "Choose a Platform!"));
+    }
+
+    public void initializeShareBtn() {
 
         //Sharing url using image button
         shareBTN.setOnClickListener(new View.OnClickListener() {
@@ -84,23 +118,5 @@ public class DetailActivity extends AppCompatActivity {
                 shareData(url);
             }
         });
-
-        //Implementing Google ads using admob
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
-
-    public void shareData(String url) {
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, "Link is :");
-        i.putExtra(Intent.EXTRA_TEXT, url);
-        startActivity(Intent.createChooser(i, "Choose a Platform!"));
     }
 }

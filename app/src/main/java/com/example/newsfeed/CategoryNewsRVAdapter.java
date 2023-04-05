@@ -1,5 +1,6 @@
 package com.example.newsfeed;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,10 +16,10 @@ import java.util.ArrayList;
 
 public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAdapter.ViewHolder> {
 
-    private ArrayList<Articles> articlesArrayList;
-    private Context context;
+    private final ArrayList<ArticleModel> articlesArrayList;
+    private final Context context;
 
-    public CategoryNewsRVAdapter(ArrayList<Articles> articlesArrayList, Context context) {
+    public CategoryNewsRVAdapter(ArrayList<ArticleModel> articlesArrayList, Context context) {
         this.articlesArrayList = articlesArrayList;
         this.context = context;
     }
@@ -27,12 +28,12 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_rv_news, parent, false);
-        return new CategoryNewsRVAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Articles articles = articlesArrayList.get(position);
+        ArticleModel articles = articlesArrayList.get(position);
         holder.subHeadingTV.setText(articles.getDescription());
         holder.headingTV.setText(articles.getTitle());
 //        Picasso.get().load(articles.getUrlToImage()).into(holder.newsIV);
@@ -55,10 +56,10 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
         return articlesArrayList.size();
     }
 
-    private class NewsModel {
-        private String image;
-        private String heading;
-        private String subheading;
+    private static class NewsModel {
+        private final String image;
+        private final String heading;
+        private final String subheading;
 
         public NewsModel(String image, String heading, String subheading) {
             this.image = image;
@@ -79,10 +80,12 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView headingTV, subHeadingTV;
-        private ImageView newsIV;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView headingTV;
+        private final TextView subHeadingTV;
+        private final ImageView newsIV;
 
+        @SuppressLint("CutPasteId")
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             headingTV = itemView.findViewById(R.id.cHeadingNews);
