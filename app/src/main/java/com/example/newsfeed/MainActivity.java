@@ -16,13 +16,32 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    RecyclerView recyclerView;
+    AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView = findViewById(R.id.idCourseRV);
+
+        initViews();
+        initializeAds();
+        initGetCategories();
+
+    }
+
+    private void initViews() {
+        recyclerView = findViewById(R.id.idCourseRV);
+        mAdView = findViewById(R.id.adView);
+    }
+
+    private void initGetCategories() {
+        //init view
+
         // created new array list..
         ArrayList<RecyclerData> recyclerDataArrayList = new ArrayList<>();
+
+        // get data from dbHelper class
         DbHelper dbHelper = new DbHelper();
         ArrayList<CategoryRVModel> categoryRVModelArrayList = dbHelper.getCategory();
 
@@ -33,15 +52,17 @@ public class MainActivity extends AppCompatActivity {
         // in this method '2' represents number of columns to be displayed in grid view.
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
 
-        // at last set adapter to recycler view.
+        // set adapter to recycler view.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void initializeAds() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }

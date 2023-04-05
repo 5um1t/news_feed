@@ -19,7 +19,14 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
+
+    ImageButton backBTN, shareBTN;
+    ImageView imageView;
+    TextView titleTV, contentTV, dateTV;
+    Button readNewsBTN;
+
     String url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,52 +35,17 @@ public class DetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
         setContentView(R.layout.activity_detail);
 
-        //Init widgets
-        Button readNewsBTN = findViewById(R.id.readNewsBTN);
-        ImageButton shareBTN = findViewById(R.id.shareBTN);
-        ImageButton backBTN = findViewById(R.id.backBTN);
-        TextView titleTV = findViewById(R.id.news_title);
-        TextView dateTV = findViewById(R.id.news_date);
-        ImageView imageView = findViewById(R.id.news_image);
-        TextView contentTV = findViewById(R.id.news_content);
+        initViews();
+        initializeShareBtn();
+        setDataToActivity();
+        initializeBackBtn();
+        initializeReadNewsBtn();
+        initAds();
+    }
 
-        //setting data using DbHelper
-        DbHelper dbHelper = new DbHelper();
-        dbHelper.helper();
-        titleTV.setText(dbHelper.articleModel.getTitle());
-        dateTV.setText(dbHelper.articleModel.getPublishedAt());
-        contentTV.setText(dbHelper.articleModel.getContent());
-        Picasso.get().load(dbHelper.articleModel.getUrlToImage()).into(imageView);
-
-        //back to previous page
-        backBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-        //Reading full news
-        readNewsBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-
-        //Sharing url using image button
-        shareBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareData(url);
-            }
-        });
-
+    private void initAds() {
         //Implementing Google ads using admob
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -85,11 +57,66 @@ public class DetailActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
 
+    private void initializeReadNewsBtn() {
+        //Reading full news
+        readNewsBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+    }
+
+    private void initializeBackBtn() {
+        //back to previous page
+        backBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    public void initViews() {
+        //Init widgets
+        readNewsBTN = findViewById(R.id.readNewsBTN);
+        shareBTN = findViewById(R.id.shareBTN);
+        backBTN = findViewById(R.id.backBTN);
+        titleTV = findViewById(R.id.news_title);
+        dateTV = findViewById(R.id.news_date);
+        imageView = findViewById(R.id.news_image);
+        contentTV = findViewById(R.id.news_content);
+    }
+
+    public void setDataToActivity() {
+        //setting data using DbHelper
+        DbHelper dbHelper = new DbHelper();
+        dbHelper.helper();
+        titleTV.setText(dbHelper.articleModel.getTitle());
+        dateTV.setText(dbHelper.articleModel.getPublishedAt());
+        contentTV.setText(dbHelper.articleModel.getContent());
+        Picasso.get().load(dbHelper.articleModel.getUrlToImage()).into(imageView);
+    }
+
+
     public void shareData(String url) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(Intent.EXTRA_TEXT, "Link is :");
         i.putExtra(Intent.EXTRA_TEXT, url);
         startActivity(Intent.createChooser(i, "Choose a Platform!"));
+    }
+
+    public void initializeShareBtn() {
+
+        //Sharing url using image button
+        shareBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareData(url);
+            }
+        });
     }
 }
