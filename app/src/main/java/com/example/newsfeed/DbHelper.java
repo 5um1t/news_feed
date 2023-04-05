@@ -89,16 +89,8 @@ public class DbHelper {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                 NewsModel newsModel = response.body();
-//                loadingPB.setVisibility(View.GONE);
-                articleModelArrayList.addAll(newsModel.getArticles());
-//                System.out.println("Articles Array List" + articlesArrayList);
-//                for (int i = 0; i < articlesArrayList.size(); i++) {
-//                    articlesArrayList.add(new ArticleModel(articles.get(i).getTitle(), articles.get(i).getDescription(),
-//                            articles.get(i).getUrlToImage(), articles.get(i).getUrl(), articles.get(i).getContent(),
-//                            articles.get(i).getPublishedAt(), articles.get(i).getAuthor()));
-//                    ArticleModel
-//                }
-//                categoryNewsRVAdapter.notifyDataSetChanged();
+                ArrayList<ArticleModel> responseArticleModelArrayList = new ArrayList<ArticleModel>(newsModel.getArticles());
+                articleModelArrayList.addAll(responseArticleModelArrayList);
             }
 
             @Override

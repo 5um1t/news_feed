@@ -34,7 +34,7 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     private ImageView categoryIV;
     private RecyclerView newsRV, categoryRV;
     protected ProgressBar loadingPB;
-    protected ArrayList<ArticleModel> articlesArrayList;
+//    protected ArrayList<ArticleModel> articlesArrayList;
     private ArrayList<CategoryRVModel> categoryRVModels;
     private CategoryRVAdapter categoryRVAdapter;
     protected CategoryNewsRVAdapter categoryNewsRVAdapter;
@@ -46,36 +46,41 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-        newsRV = findViewById(R.id.cNews);
-        categoryRV = findViewById(R.id.categories);
-        loadingPB = findViewById(R.id.cLoading);
-        articlesArrayList = new ArrayList<>();
-        categoryRVModels = new ArrayList<>();
-
-        categoryRVAdapter = new CategoryRVAdapter(categoryRVModels, this, this::onCategoryClick);
-
-        categoryRV.setAdapter(categoryRVAdapter);
+        initViews();
+        setInitData();
         getCategories();
-//        getNews("General");
-//        DbHelper dbHelper = new DbHelper();
-        ArrayList<ArticleModel> articlesArrayList = DbHelper.getNews("General");
-        categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
-        newsRV.setLayoutManager(new LinearLayoutManager(this));
-        newsRV.setAdapter(categoryNewsRVAdapter);
-//        categoryNewsRVAdapter.notifyDataSetChanged();
-        tb = findViewById(R.id.cToolbar);
-        tbText = findViewById(R.id.toolbarText);
-        adv = findViewById(R.id.adView);
+        initializeAds();
+    }
 
-
+    private void initializeAds() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        adv = findViewById(R.id.adView);
+
         AdRequest adRequest = new AdRequest.Builder().build();
         adv.loadAd(adRequest);
+    }
+
+    private void setInitData() {
+        categoryRVModels = new ArrayList<>();
+        categoryRVAdapter = new CategoryRVAdapter(categoryRVModels, this, this::onCategoryClick);
+        categoryRV.setAdapter(categoryRVAdapter);
+
+        ArrayList<ArticleModel> articlesArrayList = DbHelper.getNews("General");
+        categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
+        newsRV.setLayoutManager(new LinearLayoutManager(this));
+        newsRV.setAdapter(categoryNewsRVAdapter);
+    }
+
+    private void initViews() {
+        newsRV = findViewById(R.id.cNews);
+        categoryRV = findViewById(R.id.categories);
+        loadingPB = findViewById(R.id.cLoading);
+        tb = findViewById(R.id.cToolbar);
+        tbText = findViewById(R.id.toolbarText);
+        adv = findViewById(R.id.adView);
     }
 
 
