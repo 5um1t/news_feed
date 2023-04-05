@@ -45,19 +45,24 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+
         newsRV = findViewById(R.id.cNews);
         categoryRV = findViewById(R.id.categories);
         loadingPB = findViewById(R.id.cLoading);
         articlesArrayList = new ArrayList<>();
         categoryRVModels = new ArrayList<>();
-        categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
+
         categoryRVAdapter = new CategoryRVAdapter(categoryRVModels, this, this::onCategoryClick);
-        newsRV.setLayoutManager(new LinearLayoutManager(this));
-        newsRV.setAdapter(categoryNewsRVAdapter);
+
         categoryRV.setAdapter(categoryRVAdapter);
         getCategories();
-        getNews("General");
-        categoryNewsRVAdapter.notifyDataSetChanged();
+//        getNews("General");
+//        DbHelper dbHelper = new DbHelper();
+        ArrayList<ArticleModel> articlesArrayList = DbHelper.getNews("General");
+        categoryNewsRVAdapter = new CategoryNewsRVAdapter(articlesArrayList, this);
+        newsRV.setLayoutManager(new LinearLayoutManager(this));
+        newsRV.setAdapter(categoryNewsRVAdapter);
+//        categoryNewsRVAdapter.notifyDataSetChanged();
         tb = findViewById(R.id.cToolbar);
         tbText = findViewById(R.id.toolbarText);
         adv = findViewById(R.id.adView);
@@ -87,44 +92,45 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
 
 
 
-    private void getNews(String category) {
-        loadingPB.setVisibility(View.VISIBLE);
-        articlesArrayList.clear();
-        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
-        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
-        String base_url = "https://newsapi.org/";
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
-        Call<NewsModel> call;
-        if (category.equals("General")) {
-            call = retrofitAPI.getAllNews(url);
-        } else {
-            call = retrofitAPI.getNewsByCategory(categoryURL);
-        }
-
-        call.enqueue(new Callback<NewsModel>() {
-            @Override
-            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                NewsModel newsModel = response.body();
-                loadingPB.setVisibility(View.GONE);
-                ArrayList<ArticleModel> articles = newsModel.getArticles();
-                for (int i = 0; i < articles.size(); i++) {
-                    articlesArrayList.add(new ArticleModel(articles.get(i).getTitle(), articles.get(i).getDescription(),
-                            articles.get(i).getUrlToImage(), articles.get(i).getUrl(), articles.get(i).getContent(),
-                            articles.get(i).getPublishedAt(), articles.get(i).getAuthor()));
-                }
-                categoryNewsRVAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<NewsModel> call, Throwable t) {
-                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void getNews(String category) {
+//        loadingPB.setVisibility(View.VISIBLE);
+//        articlesArrayList.clear();
+//        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
+//        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
+//        String base_url = "https://newsapi.org/";
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(base_url)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+//        Call<NewsModel> call;
+//        if (category.equals("General")) {
+//            call = retrofitAPI.getAllNews(url);
+//        } else {
+//            call = retrofitAPI.getNewsByCategory(categoryURL);
+//        }
+//
+//        call.enqueue(new Callback<NewsModel>() {
+//            @Override
+//            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+//                NewsModel newsModel = response.body();
+//                loadingPB.setVisibility(View.GONE);
+//                ArrayList<ArticleModel> articles = newsModel.getArticles();
+//                for (int i = 0; i < articles.size(); i++) {
+//                    articlesArrayList.add(new ArticleModel(articles.get(i).getTitle(), articles.get(i).getDescription(),
+//                            articles.get(i).getUrlToImage(), articles.get(i).getUrl(), articles.get(i).getContent(),
+//                            articles.get(i).getPublishedAt(), articles.get(i).getAuthor()));
+//                }
+//                categoryNewsRVAdapter.notifyDataSetChanged();
+//                return articles;
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsModel> call, Throwable t) {
+//                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
 
 
@@ -132,6 +138,6 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     @Override
     public void onCategoryClick(int position) {
         String category = categoryRVModels.get(position).getCategory();
-        getNews(category);
+//        getNews(category);
     }
 }

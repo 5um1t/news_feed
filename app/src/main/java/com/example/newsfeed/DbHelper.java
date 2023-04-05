@@ -1,11 +1,19 @@
 package com.example.newsfeed;
 
 
-import com.google.gson.JsonIOException;
+import android.content.Context;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DbHelper {
 
@@ -56,5 +64,48 @@ public class DbHelper {
         articleModel.setUrlToImage("https://ichef.bbci.co.uk/news/1024/branded_news/1774A/production/_129247069_cov.png");
         articleModel.setContent("Tornadoes that tore through several US states including Arkansas and Illinois have resulted in several deaths and widespread damage to buildings. Jessica Bahena Hernandez was at a heavy metal gig in… [+247 chars]");
         return null;
+    }
+
+    public static ArrayList<ArticleModel> getNews(String category){
+
+        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
+        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
+        String base_url = "https://newsapi.org/";
+        ArrayList<ArticleModel> articleModelArrayList = new ArrayList<ArticleModel>();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(base_url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<NewsModel> call;
+        if (category.equals("General")) {
+            call = retrofitAPI.getAllNews(url);
+        } else {
+            call = retrofitAPI.getNewsByCategory(categoryURL);
+        }
+
+        call.enqueue(new Callback<NewsModel>() {
+            @Override
+            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                NewsModel newsModel = response.body();
+//                loadingPB.setVisibility(View.GONE);
+                articleModelArrayList.addAll(newsModel.getArticles());
+//                System.out.println("Articles Array List" + articlesArrayList);
+//                for (int i = 0; i < articlesArrayList.size(); i++) {
+//                    articlesArrayList.add(new ArticleModel(articles.get(i).getTitle(), articles.get(i).getDescription(),
+//                            articles.get(i).getUrlToImage(), articles.get(i).getUrl(), articles.get(i).getContent(),
+//                            articles.get(i).getPublishedAt(), articles.get(i).getAuthor()));
+//                    ArticleModel
+//                }
+//                categoryNewsRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<NewsModel> call, Throwable t) {
+//                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return articleModelArrayList;
     }
 }
