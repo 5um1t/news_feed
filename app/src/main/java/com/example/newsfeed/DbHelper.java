@@ -18,6 +18,30 @@ public class DbHelper {
         return null;
     }
 
+    public ArrayList<CarouselItem> getCarousalItems(){
+        ArrayList<CarouselItem> carousalItemArrayList=new ArrayList<>();
+
+        CarouselItem carousalItem1 =new CarouselItem();
+        carousalItem1.setImageResource("https://images.unsplash.com/photo-1486012345871-f47c8c407079?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+        carousalItem1.setTitle("Title 1");
+        carousalItem1.setDescription("Description 1");
+        carousalItemArrayList.add(carousalItem1);
+
+        CarouselItem carousalItem2 =new CarouselItem();
+        carousalItem2.setImageResource("https://images.unsplash.com/photo-1512195740027-7bce37e3fc21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+        carousalItem2.setTitle("Title 2");
+        carousalItem2.setDescription("Description 2");
+        carousalItemArrayList.add(carousalItem2);
+
+        CarouselItem carousalItem3 =new CarouselItem();
+        carousalItem3.setImageResource("https://images.unsplash.com/photo-1554564761-03c1199a2bd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80");
+        carousalItem3.setTitle("Title 3");
+        carousalItem3.setDescription("Description 3");
+        carousalItemArrayList.add(carousalItem3);
+
+        return carousalItemArrayList;
+    }
+
 
     public ArrayList<CategoryRVModel> getCategory() {
         ArrayList<CategoryRVModel> categoryRVModelArrayList = new ArrayList<>();
