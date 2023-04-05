@@ -2,6 +2,7 @@ package com.example.newsfeed;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     private CategoryRVAdapter categoryRVAdapter;
     private CategoryNewsRVAdapter categoryNewsRVAdapter;
     private AdView adv;
+    ImageButton backBTN;
 
     public CategoriesPageActivity() {
     }
@@ -52,6 +54,13 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         getCategories();
         getNews("General");
         initializeAds();
+
+        backBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initializeAds() {
@@ -60,7 +69,6 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
         AdRequest adRequest = new AdRequest.Builder().build();
         adv.loadAd(adRequest);
     }
@@ -79,9 +87,10 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         newsRV = findViewById(R.id.cNews);
         categoryRV = findViewById(R.id.categories);
         loadingPB = findViewById(R.id.cLoading);
-        tb = findViewById(R.id.cToolbar);
-        tbText = findViewById(R.id.toolbarText);
+//        tb = findViewById(R.id.cToolbar);
+//        tbText = findViewById(R.id.toolbarText);
         adv = findViewById(R.id.adView);
+        backBTN = findViewById(R.id.backBTN);
     }
 
     private void getCategories() {

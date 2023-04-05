@@ -23,16 +23,6 @@ public class ArticleModel {
 
     }
 
-    //    public void ArticleModel(String title, String description, String urlToImage, String url, String content, String publishedAt, String author) {
-//        this.title = title;
-//        this.description = description;
-//        this.urlToImage = urlToImage;
-//        this.url = url;
-//        this.content = content;
-//        this.publishedAt = publishedAt;
-//        this.author = author;
-//    }
-
     public String getTitle() {
         return title;
     }
