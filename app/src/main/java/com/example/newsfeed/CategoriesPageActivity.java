@@ -140,14 +140,5 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         String category = categoryRVModels.get(position).getCategory();
         getNews(category);
     }
-//
-//    @Override
-//    public void onEventCompleted() {
-//
-//    }
-//
-//    @Override
-//    public void onEventFailed() {
-//
-//    }
+
 }
