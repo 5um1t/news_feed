@@ -68,6 +68,8 @@ public class DbHelper {
 
     public static ArrayList<ArticleModel> getNews(String category){
 
+        MyEventListener newsAPICallEventListener;
+
         String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
         String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
         String base_url = "https://newsapi.org/";

@@ -28,7 +28,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CategoriesPageActivity extends AppCompatActivity implements CategoryRVAdapter.CategoryClickInterface {
+public class CategoriesPageActivity extends AppCompatActivity implements CategoryRVAdapter.CategoryClickInterface,MyEventListener {
     private Toolbar tb;
     private TextView tbText;
     private ImageView categoryIV;
@@ -144,5 +144,15 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     public void onCategoryClick(int position) {
         String category = categoryRVModels.get(position).getCategory();
 //        getNews(category);
+    }
+
+    @Override
+    public void onEventCompleted() {
+
+    }
+
+    @Override
+    public void onEventFailed() {
+
     }
 }
