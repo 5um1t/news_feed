@@ -66,40 +66,40 @@ public class DbHelper {
         return null;
     }
 
-    public static ArrayList<ArticleModel> getNews(String category){
-
-        MyEventListener newsAPICallEventListener;
-
-        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
-        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
-        String base_url = "https://newsapi.org/";
-        ArrayList<ArticleModel> articleModelArrayList = new ArrayList<ArticleModel>();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
-        Call<NewsModel> call;
-        if (category.equals("General")) {
-            call = retrofitAPI.getAllNews(url);
-        } else {
-            call = retrofitAPI.getNewsByCategory(categoryURL);
-        }
-
-        call.enqueue(new Callback<NewsModel>() {
-            @Override
-            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                NewsModel newsModel = response.body();
-                ArrayList<ArticleModel> responseArticleModelArrayList = new ArrayList<ArticleModel>(newsModel.getArticles());
-                articleModelArrayList.addAll(responseArticleModelArrayList);
-            }
-
-            @Override
-            public void onFailure(Call<NewsModel> call, Throwable t) {
-//                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
-            }
-        });
-        return articleModelArrayList;
-    }
+//    public static ArrayList<ArticleModel> getNews(String category){
+//
+//        MyEventListener newsAPICallEventListener;
+//
+//        String categoryURL = "https://newsapi.org/v2/top-headlines?country=in&category=" + category + "&apikey=1db2960de0234c81b3f2b5c5dc509ab3";
+//        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
+//        String base_url = "https://newsapi.org/";
+//        ArrayList<ArticleModel> articleModelArrayList = new ArrayList<ArticleModel>();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(base_url)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+//        Call<NewsModel> call;
+//        if (category.equals("General")) {
+//            call = retrofitAPI.getAllNews(url);
+//        } else {
+//            call = retrofitAPI.getNewsByCategory(categoryURL);
+//        }
+//
+//        call.enqueue(new Callback<NewsModel>() {
+//            @Override
+//            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+//                NewsModel newsModel = response.body();
+//                ArrayList<ArticleModel> responseArticleModelArrayList = new ArrayList<ArticleModel>(newsModel.getArticles());
+//                articleModelArrayList.addAll(responseArticleModelArrayList);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsModel> call, Throwable t) {
+////                Toast.makeText(CategoriesPageActivity.this, "Failed to load news", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        return articleModelArrayList;
+//    }
 }
