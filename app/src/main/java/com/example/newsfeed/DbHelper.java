@@ -1,11 +1,9 @@
 package com.example.newsfeed;
 
-
 import java.util.ArrayList;
 
 public class DbHelper {
     ArticleModel articleModel = new ArticleModel();
-
 
     public DbHelper() {
     }

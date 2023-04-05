@@ -15,7 +15,6 @@
             android:id="@+id/cIVnews"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/download"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -39,8 +38,6 @@
             android:layout_margin="3dp"
             android:maxLines="3"
             android:padding="3dp"
-            android:text="Subheadings Subheadings Subheadings Subheadings
-                          Subheadings Subheadings Subheadings Subheadings"
             android:textColor="@color/white" />
 
     </RelativeLayout>

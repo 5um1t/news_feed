@@ -15,8 +15,8 @@
             android:id="@+id/cIVCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/images"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@color/yellow"/>
 
         <TextView
             android:id="@+id/cTVCategory"
@@ -25,6 +25,11 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:padding="3dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:textSize="18sp"
             android:text="Category"
             android:textAlignment="center"
             android:textColor="@color/white"

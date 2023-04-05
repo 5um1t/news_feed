@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAdapter.ViewHolder> {
@@ -33,19 +35,21 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ArticleModel articles = articlesArrayList.get(position);
-        holder.subHeadingTV.setText(articles.getDescription());
-        holder.headingTV.setText(articles.getTitle());
-//        Picasso.get().load(articles.getUrlToImage()).into(holder.newsIV);
+
+        ArticleModel article = articlesArrayList.get(position);
+        holder.subHeadingTV.setText(article.getDescription());
+        holder.headingTV.setText(article.getTitle());
+        Picasso.get().load(article.getUrlToImage()).into(holder.newsIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailActivity.class);
-                i.putExtra("title", articles.getTitle());
-                i.putExtra("content", articles.getContent());
-                i.putExtra("desc", articles.getDescription());
-                i.putExtra("image", articles.getUrlToImage());
-                i.putExtra("url", articles.getUrl());
+                i.putExtra("title", article.getTitle());
+                i.putExtra("content", article.getContent());
+                i.putExtra("desc", article.getDescription());
+                i.putExtra("imageURL", article.getUrlToImage());
+                i.putExtra("url", article.getUrl());
+                i.putExtra("publishedAt",article.getPublishedAt());
                 context.startActivity(i);
             }
         });
@@ -89,7 +93,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             headingTV = itemView.findViewById(R.id.cHeadingNews);
-            subHeadingTV = itemView.findViewById(R.id.cHeadingNews);
+            subHeadingTV = itemView.findViewById(R.id.cSubheadingNews);
             newsIV = itemView.findViewById(R.id.cIVnews);
         }
     }

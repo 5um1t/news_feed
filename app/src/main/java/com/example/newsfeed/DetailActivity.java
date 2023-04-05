@@ -21,11 +21,12 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity {
 
     ImageButton backBTN, shareBTN;
+
+    String title,url,imageURL,content,desc,publishedAt;
     ImageView imageView;
     TextView titleTV, contentTV, dateTV;
     Button readNewsBTN;
 
-    String url;
 
 
     @Override
@@ -92,12 +93,15 @@ public class DetailActivity extends AppCompatActivity {
 
     public void setDataToActivity() {
         //setting data using DbHelper
-        DbHelper dbHelper = new DbHelper();
-        dbHelper.helper();
-        titleTV.setText(dbHelper.articleModel.getTitle());
-        dateTV.setText(dbHelper.articleModel.getPublishedAt());
-        contentTV.setText(dbHelper.articleModel.getContent());
-        Picasso.get().load(dbHelper.articleModel.getUrlToImage()).into(imageView);
+        title=getIntent().getStringExtra("title");
+        titleTV.setText(title);
+        url=getIntent().getStringExtra("url");
+        imageURL=getIntent().getStringExtra("imageURL");
+        content=getIntent().getStringExtra("content");
+        contentTV.setText(content);
+        publishedAt=getIntent().getStringExtra("publishedAt");
+        dateTV.setText(publishedAt);
+        Picasso.get().load(imageURL).into(imageView);
     }
 
 
