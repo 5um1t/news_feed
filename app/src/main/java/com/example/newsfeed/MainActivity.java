@@ -1,5 +1,6 @@
 package com.example.newsfeed;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
         // get data from dbHelper class
         DbHelper dbHelper = new DbHelper();
-        ArrayList<CategoryRVModel> categoryRVModelArrayList = dbHelper.getCategory();
+        ArrayList<CategoryRVModel> categoryRVModelArrayList = new ArrayList<>();
+        categoryRVModelArrayList = dbHelper.getCategory();
+//        Intent i = new Intent(MainActivity.this,CategoriesPageActivity.class);
+//        i.putExtra("categories",categoryRVModelArrayList);
 
         // added data from arraylist to adapter class.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryRVModelArrayList, this);
