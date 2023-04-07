@@ -29,9 +29,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CategoriesPageActivity extends AppCompatActivity implements CategoryRVAdapter.CategoryClickInterface {
-    private Toolbar tb;
-    private TextView tbText;
-    private ImageView categoryIV;
     private ArrayList<ArticleModel> articlesArrayList = new ArrayList<ArticleModel>();
     private RecyclerView newsRV, categoryRV;
     private ProgressBar loadingPB;
@@ -91,24 +88,15 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         newsRV = findViewById(R.id.cNews);
         categoryRV = findViewById(R.id.categories);
         loadingPB = findViewById(R.id.cLoading);
-//        tb = findViewById(R.id.cToolbar);
-//        tbText = findViewById(R.id.toolbarText);
         adv = findViewById(R.id.adView);
         backBTN = findViewById(R.id.backBTN);
     }
 
     private void getCategories() {
-
-//        ArrayList<CategoryRVModel> intentCategoryRVModel = new ArrayList<>();
-//        intentCategoryRVModel = getIntent().getParcelableArrayListExtra("categories");
-//        categoryRVModels.addAll(intentCategoryRVModel);
-
         DbHelper dbHelper = new DbHelper();
         categoryRVModels.addAll(dbHelper.getCategory());
-
         categoryRVAdapter.notifyDataSetChanged();
     }
-
 
     private void getNews(String category) {
         loadingPB.setVisibility(View.VISIBLE);
@@ -154,5 +142,4 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
         String category = categoryRVModels.get(position).getCategory();
         getNews(category);
     }
-
 }
