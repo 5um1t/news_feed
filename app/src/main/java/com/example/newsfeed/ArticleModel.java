@@ -23,6 +23,12 @@ public class ArticleModel {
 
     }
 
+    public ArticleModel(String title, String description, String urlToImage) {
+        this.title = title;
+        this.description = description;
+        this.urlToImage = urlToImage;
+    }
+
     public String getTitle() {
         return title;
     }

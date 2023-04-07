@@ -1,6 +1,7 @@
 package com.example.newsfeed;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,14 +18,25 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     AdView mAdView;
     private ViewPager2 viewPager;
-    private CarouselAdapter adapter;
+    private CarouselAdapter carouselAdapter;
+
     private Timer timer;
     private int currentItem = 0;
+    private ArrayList<ArticleModel> articleModelArrayList = new ArrayList<ArticleModel>();
+
+    private ArrayList<CarouselItem> carouselItemArrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +46,43 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initializeAds();
         initGetCategories();
+        getCarouselNews();
         initCarousel();
+    }
+
+    private void getCarouselNews() {
+
+        articleModelArrayList.clear();
+        String url = "https://newsapi.org/v2/top-headlines?country=in&sortBy=publishedAt&language=en&apiKey=1db2960de0234c81b3f2b5c5dc509ab3";
+        String base_url = "https://newsapi.org/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(base_url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
+        Call<NewsModel> call;
+        call = retrofitAPI.getCarouselNews(url);
+
+        call.enqueue(new Callback<NewsModel>() {
+            @Override
+            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
+                NewsModel newsModel = response.body();
+                ArrayList<ArticleModel> articleModelArrayList1 = newsModel.getArticles();
+
+                for (int i = 0; i < 3; i++) {
+                    ArticleModel articleModel = articleModelArrayList1.get(i);
+                    carouselItemArrayList.add(new CarouselItem( articleModel.getUrlToImage(),articleModel.getTitle(), articleModel.getDescription()));
+                }
+                carouselAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<NewsModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Failed to Load news in Carousel", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -44,10 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCarousel() {
-        DbHelper dbHelper = new DbHelper();
-        ArrayList<CarouselItem> carouselItemArrayList = dbHelper.getCarousalItems();
-        adapter = new CarouselAdapter(carouselItemArrayList);
-        viewPager.setAdapter(adapter);
+        carouselAdapter = new CarouselAdapter(carouselItemArrayList);
+        viewPager.setAdapter(carouselAdapter);
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
