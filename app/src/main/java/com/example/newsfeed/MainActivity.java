@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCarousel() {
-        DbHelper dbHelper=new DbHelper();
-        ArrayList<CarouselItem> carouselItemArrayList=dbHelper.getCarousalItems();
+        DbHelper dbHelper = new DbHelper();
+        ArrayList<CarouselItem> carouselItemArrayList = dbHelper.getCarousalItems();
         adapter = new CarouselAdapter(carouselItemArrayList);
         viewPager.setAdapter(adapter);
 
@@ -76,12 +76,10 @@ public class MainActivity extends AppCompatActivity {
     private void initGetCategories() {
         //init view
 
-        // created new array list..
-        ArrayList<RecyclerData> recyclerDataArrayList = new ArrayList<>();
-
         // get data from dbHelper class
         DbHelper dbHelper = new DbHelper();
-        ArrayList<CategoryRVModel> categoryRVModelArrayList = dbHelper.getCategory();
+        ArrayList<CategoryRVModel> categoryRVModelArrayList = new ArrayList<>();
+        categoryRVModelArrayList = dbHelper.getCategory();
 
         // added data from arraylist to adapter class.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryRVModelArrayList, this);

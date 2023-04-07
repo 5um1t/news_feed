@@ -41,6 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), CategoriesPageActivity.class);
+                intent.putExtra("Category",categoryRVModel.getCategory());
                 v.getContext().startActivity(intent);
             }
         });
