@@ -2,6 +2,7 @@ package com.example.newsfeed;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<CategoryRVModel> categoryRVModelArrayList = new ArrayList<>();
         categoryRVModelArrayList = dbHelper.getCategory();
 //        Intent i = new Intent(MainActivity.this,CategoriesPageActivity.class);
-//        i.putExtra("categories",categoryRVModelArrayList);
+//        i.putParcelableArrayListExtra("categories",categoryRVModelArrayList);
 
         // added data from arraylist to adapter class.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryRVModelArrayList, this);
