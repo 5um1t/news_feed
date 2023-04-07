@@ -10,10 +10,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder> {
-    private List<CarouselItem> items;
+    private ArrayList<CarouselItem> items;
+
+
+    public CarouselAdapter(ArrayList<CarouselItem> items) {
+        this.items = items;
+    }
+
+
+    @NonNull
+    @Override
+    public CarouselViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carousel_item, parent, false);
+        return new CarouselViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CarouselViewHolder holder, int position) {
+        CarouselItem carouselItem=items.get(position);
+        holder.titleTextView.setText(carouselItem.getTitle());
+        holder.descriptionTextView.setText(carouselItem.getDescription());
+        Picasso.get().load(carouselItem.getImageResource()).into(holder.imageView);
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
 
     public static class CarouselViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
@@ -26,31 +54,5 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
             descriptionTextView = itemView.findViewById(R.id.description_text_view);
         }
 
-        public void bind(CarouselItem item) {
-            Picasso.get().load(item.getImageResource()).into(imageView);
-            titleTextView.setText(item.getTitle());
-            descriptionTextView.setText(item.getDescription());
-        }
-    }
-
-    public CarouselAdapter(List<CarouselItem> items) {
-        this.items = items;
-    }
-
-    @NonNull
-    @Override
-    public CarouselViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carousel_item, parent, false);
-        return new CarouselViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CarouselViewHolder holder, int position) {
-        holder.bind(items.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
     }
 }

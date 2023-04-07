@@ -10,4 +10,7 @@ public interface RetrofitAPI {
 
     @GET
     Call<NewsModel> getNewsByCategory(@Url String url);
+
+    @GET
+    Call<NewsModel> getCarouselNews(@Url String url);
 }
