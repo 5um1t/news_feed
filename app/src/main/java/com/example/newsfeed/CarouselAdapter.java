@@ -33,7 +33,6 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
     public void onBindViewHolder(@NonNull CarouselViewHolder holder, int position) {
         CarouselItem carouselItem=items.get(position);
         holder.titleTextView.setText(carouselItem.getTitle());
-        holder.descriptionTextView.setText(carouselItem.getDescription());
         Picasso.get().load(carouselItem.getImageResource()).into(holder.imageView);
     }
 
@@ -46,12 +45,10 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.Carous
     public static class CarouselViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView titleTextView;
-        private TextView descriptionTextView;
         public CarouselViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view);
             titleTextView = itemView.findViewById(R.id.title_text_view);
-            descriptionTextView = itemView.findViewById(R.id.description_text_view);
         }
 
     }
