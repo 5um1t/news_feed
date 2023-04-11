@@ -4,12 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/grey"
-    app:cardCornerRadius="4dp">
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="4dp"
+    android:shadowColor="@color/grey"
+    android:shadowDx="15"
+    android:shadowDy="15"
+    android:shadowRadius="15"
+    app:cardElevation="6dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <ImageView
             android:id="@+id/cIVnews"
@@ -22,11 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cIVnews"
-            android:layout_margin="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
             android:maxLines="2"
             android:padding="3dp"
             android:text="News Heading"
-            android:textColor="@color/yellow"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -35,10 +43,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cHeadingNews"
-            android:layout_margin="3dp"
+            android:text="Sub Headings"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
             android:maxLines="3"
             android:padding="3dp"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/darker_gray" />
 
     </RelativeLayout>
 
