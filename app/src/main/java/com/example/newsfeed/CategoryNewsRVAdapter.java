@@ -48,6 +48,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
                 i.putExtra("content", article.getContent());
                 i.putExtra("desc", article.getDescription());
                 i.putExtra("imageURL", article.getUrlToImage());
+                i.putExtra("author",article.getAuthor());
                 i.putExtra("url", article.getUrl());
                 i.putExtra("publishedAt",article.getPublishedAt());
                 context.startActivity(i);

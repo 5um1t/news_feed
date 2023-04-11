@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 NewsModel newsModel = response.body();
                 ArrayList<ArticleModel> articleModelArrayList1 = newsModel.getArticles();
 
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 4; i++) {
                     ArticleModel articleModel = articleModelArrayList1.get(i);
-                    carouselItemArrayList.add(new CarouselItem( articleModel.getUrlToImage(),articleModel.getTitle(), articleModel.getDescription()));
+                    carouselItemArrayList.add(new CarouselItem( articleModel.getUrlToImage(),articleModel.getTitle()));
                 }
                 carouselAdapter.notifyDataSetChanged();
             }
