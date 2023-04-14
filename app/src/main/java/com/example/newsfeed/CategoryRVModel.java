@@ -8,17 +8,11 @@ import androidx.annotation.NonNull;
 public class CategoryRVModel implements Parcelable {
     private String category;
     private String categoryImageUrl;
-    private boolean isSelected;
-
 
     public CategoryRVModel() {
 
     }
 
-    public CategoryRVModel(String category){
-        this.category=category;
-        this.isSelected = false;
-    }
 
 
     protected CategoryRVModel(Parcel in) {
@@ -54,13 +48,6 @@ public class CategoryRVModel implements Parcelable {
         this.categoryImageUrl = categoryImageUrl;
     }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public boolean isSelected(){
-        return isSelected;
-    }
 
     public CategoryRVModel(String category, String categoryImageUrl) {
         this.category = category;

@@ -141,6 +141,5 @@ public class CategoriesPageActivity extends AppCompatActivity implements Categor
     public void onCategoryClick(int position) {
         String category = categoryRVModels.get(position).getCategory();
         getNews(category);
-        categoryRVAdapter.setSelectedCategory(position);
     }
 }

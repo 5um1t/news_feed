@@ -39,18 +39,11 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryRVModel categoryRVModel = categoryRVModels.get(position);
         holder.categoryTV.setText(categoryRVModel.getCategory());
-//        Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.categoryIV);
-
-        if(categoryRVModel.isSelected()){
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.selected_category));
-        } else {
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-        }
+        Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.categoryIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 categoryClickInterface.onCategoryClick(position);
-                setSelectedCategory(position);
             }
         });
     }
@@ -64,16 +57,6 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
         void onCategoryClick(int position);
     }
 
-    public void setSelectedCategory(int position){
-        for(int i=0;i< categoryRVModels.size();i++){
-            if (i == position) {
-                categoryRVModels.get(i).setSelected(true);
-            } else {
-                categoryRVModels.get(i).setSelected(false);
-            }
-        }
-        notifyDataSetChanged();
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView categoryTV;
