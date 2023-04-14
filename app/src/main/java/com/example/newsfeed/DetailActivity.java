@@ -103,7 +103,11 @@ public class DetailActivity extends AppCompatActivity {
         title=getIntent().getStringExtra("title");
         titleTV.setText(title);
         author=getIntent().getStringExtra("author");
-        authorTV.setText(author);
+        if(author != null){
+            authorTV.setText(author);
+        } else {
+            authorTV.setVisibility(View.GONE);
+        }
         url=getIntent().getStringExtra("url");
         imageURL=getIntent().getStringExtra("imageURL");
         content=getIntent().getStringExtra("content");

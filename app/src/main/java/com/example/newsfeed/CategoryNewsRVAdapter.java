@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAdapter.ViewHolder> {
 
@@ -39,6 +42,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
         ArticleModel article = articlesArrayList.get(position);
         holder.subHeadingTV.setText(article.getDescription());
         holder.headingTV.setText(article.getTitle());
+        holder.publishedAtTV.setText(formatDate(article.getPublishedAt()));
         Picasso.get().load(article.getUrlToImage()).into(holder.newsIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,19 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
     @Override
     public int getItemCount() {
         return articlesArrayList.size();
+    }
+
+    public String formatDate(String dateTimeString){
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy h:mm a");
+        String formattedDate = "";
+        try {
+            Date date = inputFormat.parse(dateTimeString);
+            formattedDate = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
     }
 
     private static class NewsModel {
@@ -89,6 +106,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
         private final TextView headingTV;
         private final TextView subHeadingTV;
         private final ImageView newsIV;
+        private final TextView publishedAtTV;
 
         @SuppressLint("CutPasteId")
         public ViewHolder(@NonNull View itemView) {
@@ -96,6 +114,7 @@ public class CategoryNewsRVAdapter extends RecyclerView.Adapter<CategoryNewsRVAd
             headingTV = itemView.findViewById(R.id.cHeadingNews);
             subHeadingTV = itemView.findViewById(R.id.cSubheadingNews);
             newsIV = itemView.findViewById(R.id.cIVnews);
+            publishedAtTV = itemView.findViewById(R.id.cDateTimeNews);
         }
     }
 }

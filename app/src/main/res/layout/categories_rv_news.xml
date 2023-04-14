@@ -51,6 +51,19 @@
             android:padding="3dp"
             android:textColor="@android:color/darker_gray" />
 
+        <TextView
+            android:id="@+id/cDateTimeNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cSubheadingNews"
+            android:text="Date and Time"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="3dp"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:textColor="@android:color/darker_gray" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
