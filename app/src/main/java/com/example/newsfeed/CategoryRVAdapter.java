@@ -1,7 +1,6 @@
 package com.example.newsfeed;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -21,6 +19,7 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
     private ArrayList<CategoryRVModel> categoryRVModels;
     private Context context;
     private CategoryClickInterface categoryClickInterface;
+    private int selectedCategory = -1;
 
     public CategoryRVAdapter(ArrayList<CategoryRVModel> categoryRVModels, Context context, CategoryClickInterface categoryClickInterface) {
         this.categoryRVModels = categoryRVModels;
@@ -40,9 +39,18 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
         CategoryRVModel categoryRVModel = categoryRVModels.get(position);
         holder.categoryTV.setText(categoryRVModel.getCategory());
         Picasso.get().load(categoryRVModel.getCategoryImageUrl()).into(holder.categoryIV);
+        if(selectedCategory == position){
+            holder.categoryIV.setImageAlpha(128);
+        }else {
+            holder.categoryIV.setImageAlpha(255);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int lastSelectedCategory = selectedCategory;
+                selectedCategory = position;
+                notifyItemChanged(lastSelectedCategory);
+                notifyItemChanged(selectedCategory);
                 categoryClickInterface.onCategoryClick(position);
             }
         });
