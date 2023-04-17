@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setting grid layout manager to implement grid view.
         // in this method '2' represents number of columns to be displayed in grid view.
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
 
         // set adapter to recycler view.
         recyclerView.setLayoutManager(layoutManager);
