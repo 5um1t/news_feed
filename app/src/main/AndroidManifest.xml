@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".CategoriesPageActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".DBHelper"/>
+        <activity android:name=".DbHelper"/>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4118569678845627~7585943370" />
