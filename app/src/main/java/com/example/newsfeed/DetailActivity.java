@@ -1,7 +1,6 @@
 package com.example.newsfeed;
 
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +21,6 @@ import com.squareup.picasso.Picasso;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 

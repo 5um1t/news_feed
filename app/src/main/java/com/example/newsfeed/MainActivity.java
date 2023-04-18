@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                 NewsModel newsModel = response.body();
+                assert newsModel != null;
                 ArrayList<ArticleModel> articleModelArrayList1 = newsModel.getArticles();
 
                 for (int i = 0; i < 4; i++) {
