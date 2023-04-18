@@ -1,5 +1,6 @@
 package com.example.newsfeed;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -130,12 +131,18 @@ public class MainActivity extends AppCompatActivity {
         categoryRVModelArrayList = dbHelper.getCategory();
 
         // added data from arraylist to adapter class.
+
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(categoryRVModelArrayList, this);
 
         // setting grid layout manager to implement grid view.
         // in this method '2' represents number of columns to be displayed in grid view.
+        GridLayoutManager layoutManager;
+        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT){
+            layoutManager = new GridLayoutManager(this, 3);
+        }else{
+            layoutManager=new GridLayoutManager(this,7);
+        }
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 7);
         // set adapter to recycler view.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
