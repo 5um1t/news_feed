@@ -1,5 +1,6 @@
 package com.example.newsfeed;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -133,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
         // setting grid layout manager to implement grid view.
         // in this method '2' represents number of columns to be displayed in grid view.
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
 
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 7);
         // set adapter to recycler view.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

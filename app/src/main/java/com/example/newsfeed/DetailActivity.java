@@ -40,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail_landscape);
 
         initViews();
         initializeShareBtn();
